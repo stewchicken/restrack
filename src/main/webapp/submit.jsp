@@ -8,13 +8,37 @@
         <!-- use local css  -->
         <style type="text/css">
             .hidden{display:none;}
-
             table{
                 border-spacing: 16px 4px;
             }
-
             td {
                 border: 1px solid black;
+            }
+
+            #dhlmic {
+                font-size: 25px;
+                width: 25px;
+                height: 25px;
+                cursor:pointer;
+                border: none;
+                position: absolute;
+                margin-left: 5px;
+                outline: none;
+                background: transparent;
+            }
+            #dhlcodes, #dhlmic {float:left;}
+            #bpostcodes, #bpostmic {float:left;}
+
+            #bpostmic {
+                font-size: 25px;
+                width: 25px;
+                height: 25px;
+                cursor:pointer;
+                border: none;
+                position: absolute;
+                margin-left: 5px;
+                outline: none;
+                background: transparent;
             }
         </style>
     </head>
@@ -23,6 +47,21 @@
         <!-- use jquery and jquery form plugin -->
         <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script> 
         <script type="text/javascript" src="js/jquery.form.js"></script> 
+        <script type="text/javascript">
+            var dhlmic = document.getElementById('dhlmic');
+            dhlmic.onfocus = dhlmic.blur;
+            dhlmic.onwebkitspeechchange = function(e) {
+                //console.log(e); // SpeechInputEvent
+                document.getElementById('dhlcodes').value = dhlmic.value;
+            };
+
+            var bpostmic = document.getElementById('bpostmic');
+            bpostmic.onfocus = bpostmic.blur;
+            bpostmic.onwebkitspeechchange = function(e) {
+                //console.log(e); // SpeechInputEvent
+                document.getElementById('bpostcodes').value = bpostmic.value;
+            };
+        </script>
         <script type="text/javascript">
             // wait for the DOM to be loaded 
             /*   
@@ -119,17 +158,19 @@
         <div class="container">
 
             <h3>批量包裹查询，包裹号之间用空格分开，后台REST ,前端JQuery，JSON数据</h3>
-
-            <form id="myForm" action="rest/query/post" method="post">
-                德国DHL:<br/>
-                <TEXTAREA NAME="dhlcodes" ROWS=10 COLS=100></TEXTAREA><BR>
-            比利时邮政:<br/>
-            <TEXTAREA NAME="bpostcodes" ROWS=10 COLS=100></TEXTAREA><BR>
-            <CENTER>
-                <INPUT TYPE="SUBMIT" VALUE="查询">
-            </CENTER>
-        </form>
-
+            <div class="form-group">
+                <form id="myForm" action="rest/query/post" method="post">
+                    德国DHL:<br/>
+                     <TEXTAREA id="dhlcodes" NAME="dhlcodes" ROWS=10 class="form-control"></TEXTAREA>
+                     <input x-webkit-speech id="dhlmic" />
+                <BR>
+                比利时邮政:<br/>
+                <TEXTAREA id="bpostcodes" NAME="bpostcodes" ROWS=10 class="form-control" ></TEXTAREA>
+                <input x-webkit-speech id="bpostmic"  />
+                <BR>
+                <button type="submit" class="btn btn-default">查询</button>
+                </form>
+        </div>
         <h3> DHL 已到达中国 </h3>
         <table id="dhlArrived" class="hidden">
             <tr>
