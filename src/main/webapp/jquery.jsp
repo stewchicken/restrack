@@ -46,10 +46,10 @@
     <body>
         <!-- use jquery , jquery i18n and jquery form plugin -->
         <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script> 
-		<script type="text/javascript" src="js/jquery.i18n.properties.js"></script>
+        <script type="text/javascript" src="js/jquery.i18n.properties.js"></script>
         <script type="text/javascript" src="js/jquery.form.js"></script> 
-		
-		<!-- it is for textarea voice input -->
+
+        <!-- it is for textarea voice input -->
         <script type="text/javascript">
             var dhlmic = document.getElementById('dhlmic');
             dhlmic.onfocus = dhlmic.blur;
@@ -80,8 +80,7 @@
                 // it is hooked on jquery jaxForm's callback function
                 $('#myForm').ajaxForm({
                     success: function(data) {
-
-                        var headertext = "<tr><td>DHL单号</td><td>中国邮政转运单号</td></tr>";
+                        var headertext= "<tr><td>"+$.i18n.prop('msg_dhlcode')+"</td><td>"+$.i18n.prop('msg_chinapostcode')+"</td></tr>";
                         var dhlnotarrivedlen = data.dhlParcels.notarrivedChina.length;
                         var dhlnotarrivedtxt = "";
 
@@ -114,7 +113,7 @@
                                 $("#dhlArrived").append(dhlarrivedtxt).removeClass("hidden");
                             }
                         }
-                        var headertext = "<tr><td>BPOST单号</td><td>EMS邮政转运单号</td></tr>";
+                        var headertext= "<tr><td>"+$.i18n.prop('msg_bpostcode')+"</td><td>"+$.i18n.prop('msg_emscode')+"</td></tr>";
                         var bpostarrivedlen = data.bpostParcels.arrivedChina.length;
                         var bpostarrivedtxt = "";
 
@@ -130,7 +129,6 @@
                             if (bpostarrivedtxt != "") {
                                 $("#bpostArrived").append(headertext);
                                 $("#bpostArrived").append(bpostarrivedtxt).removeClass("hidden");
-                                //$("#dhlArrived").append(dhlarrivedtxt).removeClass("hidden");
                             }
                         }
 
@@ -147,7 +145,6 @@
                             if (bpostnotarrivedtxt != "") {
                                 $("#bpostnotArrived").append(headertext);
                                 $("#bpostnotArrived").append(bpostnotarrivedtxt).removeClass("hidden");
-                                //$("#dhlArrived").append(dhlarrivedtxt).removeClass("hidden");
                             }
                         }
 
@@ -157,55 +154,84 @@
 
         </script> 
 
+        <script>
+            $(function() {
+                loadProperties();
+            });
 
+            function loadProperties() {
+                jQuery.i18n.properties({//å è½½èµæµè§å¨è¯­è¨å¯¹åºçèµæºæä»¶
+                    name: 'Messages', //èµæºæä»¶åç§°
+                    path: 'bundle/', //èµæºæä»¶è·¯å¾
+                    mode: 'map', //ç¨Mapçæ¹å¼ä½¿ç¨èµæºæä»¶ä¸­çå¼
+                    callback: function() {//å è½½æååè®¾ç½®æ¾ç¤ºåå®¹
+                        //ç¨æ·å
+                        $('#msg_title').html($.i18n.prop('msg_title'));
+                        $('#msg_dhl').html($.i18n.prop('msg_dhl'));
+                        $('#msg_bpost').html($.i18n.prop('msg_bpost'));
+                        $('#msg_query').html($.i18n.prop('msg_query'));
+                        $('#msg_dhlarrive').html($.i18n.prop('msg_dhlarrive'));
+                        $('#msg_dhlcode').html($.i18n.prop('msg_dhlcode'));
+                        $('#msg_chinapostcode').html($.i18n.prop('msg_chinapostcode'));
+                        $('#msg_dhlnotarrive').html($.i18n.prop('msg_dhlnotarrive'));
+                        $('#msg_bpostarrive').html($.i18n.prop('msg_bpostarrive'));
+                        $('#msg_bpostcode').html($.i18n.prop('msg_bpostcode'));
+                        $('#msg_emscode').html($.i18n.prop('msg_emscode'));
+                        $('#msg_bpostnotarrive').html($.i18n.prop('msg_bpostnotarrive'));
+                     
+                     
+                    }
+                });
+            }
+
+        </script>
         <div class="container">
-
-            <h3>批量包裹查询，包裹号之间用空格分开，后台REST ,前端JQuery，JSON数据</h3>
+            <h3><label id="msg_title"></label></h3>
             <div class="form-group">
                 <form id="myForm" action="rest/query/post" method="post">
-                    德国DHL:<br/>
+                   <label id="msg_dhl"></label><br/>
                      <TEXTAREA id="dhlcodes" NAME="dhlcodes" ROWS=10 class="form-control"></TEXTAREA>
                      <input x-webkit-speech id="dhlmic" />
                 <BR>
-                比利时邮政:<br/>
+                 <label id="msg_bpost"></label><br/>
                 <TEXTAREA id="bpostcodes" NAME="bpostcodes" ROWS=10 class="form-control" ></TEXTAREA>
                 <input x-webkit-speech id="bpostmic"  />
                 <BR>
-                <button type="submit" class="btn btn-default">查询</button>
+                <button type="submit" class="btn btn-default"><label id="msg_query"></label></button>
                 </form>
         </div>
-        <h3> DHL 已到达中国 </h3>
+        <h3>  <label id="msg_dhlarrive"></label></h3>
         <table id="dhlArrived" class="hidden">
             <tr>
-                <th>DHL 包裹单号</th>
-                <th>中国邮政转运号</th>
+                <th><label id="msg_dhlcode"></label></th>
+                <th><label id="msg_chinapostcode"></label></th>
             </tr>
         </table>
     
-        <h3> DHL 还未到到达中国 </h3>
+        <h3> <label id="msg_dhlnotarrive"></label> </h3>
         <table id="dhlnotArrived" class="hidden">
             <tr>
-                <th>DHL 包裹单号</th>
-                <th>中国邮政转运号</th>
+                <th><label id="msg_dhlcode"></label></th>
+                <th><label id="msg_chinapostcode"></label></th>
             </tr>
         </table>
     
         <br>
         
-        <h3> BPOST 已到达中国 </h3>
+        <h3> <label id="msg_bpostarrive"></label> </h3>
         <table id="bpostArrived" class="hidden">
             <tr>
-                <th>BPOST 包裹单号</th>
-                <th>中国邮政转运号</th>
+                <th><label id="msg_bpostcode"></label></th>
+                <th><label id="msg_emscode"></label></th>
             </tr>
         </table>
     
         
-        <h3> BPOST 还未到到达中国 </h3>
+        <h3> <label id="msg_bpostnotarrive"></label>  </h3>
         <table id="bpostnotArrived" class="hidden">
             <tr>
-                <th>DHL 包裹单号</th>
-                <th>中国邮政转运号</th>
+               <th><label id="msg_bpostcode"></label></th>
+                <th><label id="msg_emscode"></label></th>
             </tr>
         </table>
         </div>

@@ -129,7 +129,7 @@ public class Query {
             while ((line = rd.readLine()) != null) {
                 result.append(line);
             }
-            System.out.println(result);
+            logger.debug(result);
 
             // Execute the method.
             /*
@@ -254,8 +254,7 @@ public class Query {
             while ((line = rd.readLine()) != null) {
                 result.append(line);
             }
-            System.out.println(result);
-
+            logger.debug(result);
             // Read the response body.
             // Deal with the response.
             // Use caution: ensure correct character encoding and
@@ -316,7 +315,6 @@ public class Query {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            // Release the connection.
              if (client != null) {
                 HttpClientUtils.closeQuietly(client);
             }
