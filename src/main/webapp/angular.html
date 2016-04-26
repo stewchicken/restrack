@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
+        <style type="text/css">
+            .hidden{display:none;}
+            table{
+                border-spacing: 16px 4px;
+            }
+            td {
+                border: 1px solid black;
+            }
+
+
+        </style>
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script> 
+        <script type="text/javascript" src="js/angular.min.js"></script> 
+        <script type="text/javascript" src="js/app.js"></script> 
+    </head>
+    <body ng-app="myModule" >
+
+
+        <div class="container" ng-controller="myController">
+
+            <h3>query DHL and BPOST parcels in batch (Angularjs 1 + Restful Service )  </h3>
+            
+
+            <div class="form-group">
+                <form id="myForm" ng-submit="submitForm()" novalidate>
+                    DHL:<br/>
+                    <TEXTAREA id="dhlcodes" NAME="dhlcodes" ROWS=10 class="form-control"  ng-model="queryFormData.dhlcodes"></TEXTAREA>
+                <BR>
+                BPOST:<br/>
+                <TEXTAREA id="bpostcodes" NAME="bpostcodes" ROWS=10 class="form-control" ng-model="queryFormData.bpostcodes" ></TEXTAREA>
+                <BR>
+                <button class="btn btn-default">Query</button>
+                </form>
+        </div>
+             
+            
+        <h3> DHL arrived China </h3>
+        <div>
+		<ul>
+			<li ng-repeat="parcel in parcels.dhlParcels.arrivedChina">
+				DHLCODE  {{ parcel.bpostcode}}  CNPOST {{ parcel.emscode}} 
+			</li>
+		</ul>
+	</div>
+        <br>
+        <h3> DHL not arrived China </h3>
+        <div>
+		<ul>
+			<li ng-repeat="parcel in parcels.dhlParcels.notarrivedChina">
+				DHLCODE  {{ parcel.bpostcode}}  CNPOST {{ parcel.emscode}} 
+			</li>
+		</ul>
+	</div>
+        <br>
+        <h3> BPOST arrived China </h3>
+        <div>
+		<ul>
+			<li ng-repeat="parcel in parcels.bpostParcels.arrivedChina">
+				BPOST  {{ parcel.bpostcode}}  EMS  {{ parcel.emscode}} 
+			</li>
+		</ul>
+	</div>
+    
+        
+        <h3> BPOST not arrived China </h3>
+        <div>
+		<ul>
+			<li ng-repeat="parcel in parcels.bpostParcels.notarrivedChina">
+				BPOST  {{ parcel.bpostcode}}  EMS  {{ parcel.emscode}} 
+			</li>
+		</ul>
+	</div>
+        
+        </div>
+    </body>
+</html>

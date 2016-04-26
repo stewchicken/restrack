@@ -41,30 +41,13 @@
                 background: transparent;
             }
         </style>
-    </head>
-
-    <body>
-        <!-- use jquery , jquery i18n and jquery form plugin -->
+		
+		<!-- use jquery , jquery i18n and jquery form plugin -->
         <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script> 
         <script type="text/javascript" src="js/jquery.i18n.properties.js"></script>
         <script type="text/javascript" src="js/jquery.form.js"></script> 
 
-        <!-- it is for textarea voice input -->
-        <script type="text/javascript">
-            var dhlmic = document.getElementById('dhlmic');
-            dhlmic.onfocus = dhlmic.blur;
-            dhlmic.onwebkitspeechchange = function(e) {
-                //console.log(e); // SpeechInputEvent
-                document.getElementById('dhlcodes').value = dhlmic.value;
-            };
 
-            var bpostmic = document.getElementById('bpostmic');
-            bpostmic.onfocus = bpostmic.blur;
-            bpostmic.onwebkitspeechchange = function(e) {
-                //console.log(e); // SpeechInputEvent
-                document.getElementById('bpostcodes').value = bpostmic.value;
-            };
-        </script>
         <script type="text/javascript">
             // wait for the DOM to be loaded 
             /*   
@@ -178,24 +161,27 @@
                         $('#msg_bpostcode').html($.i18n.prop('msg_bpostcode'));
                         $('#msg_emscode').html($.i18n.prop('msg_emscode'));
                         $('#msg_bpostnotarrive').html($.i18n.prop('msg_bpostnotarrive'));
-                     
+        
                      
                     }
                 });
             }
 
         </script>
+		
+    </head>
+
+    <body>
+
         <div class="container">
             <h3><label id="msg_title"></label></h3>
             <div class="form-group">
                 <form id="myForm" action="rest/query/post" method="post">
                    <label id="msg_dhl"></label><br/>
                      <TEXTAREA id="dhlcodes" NAME="dhlcodes" ROWS=10 class="form-control"></TEXTAREA>
-                     <input x-webkit-speech id="dhlmic" />
                 <BR>
                  <label id="msg_bpost"></label><br/>
                 <TEXTAREA id="bpostcodes" NAME="bpostcodes" ROWS=10 class="form-control" ></TEXTAREA>
-                <input x-webkit-speech id="bpostmic"  />
                 <BR>
                 <button type="submit" class="btn btn-default"><label id="msg_query"></label></button>
                 </form>

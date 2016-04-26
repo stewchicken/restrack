@@ -81,7 +81,7 @@
                 $('#myForm').ajaxForm({
                     success: function(data) {
 
-                        var headertext = "<tr><td>DHL单号</td><td>中国邮政转运单号</td></tr>";
+                        var headertext = "<tr><td>DHL Parcelcode</td><td>ChinaPost Parcelcode</td></tr>";
                         var dhlnotarrivedlen = data.dhlParcels.notarrivedChina.length;
                         var dhlnotarrivedtxt = "";
 
@@ -114,7 +114,7 @@
                                 $("#dhlArrived").append(dhlarrivedtxt).removeClass("hidden");
                             }
                         }
-                        var headertext = "<tr><td>BPOST单号</td><td>EMS邮政转运单号</td></tr>";
+                        var headertext = "<tr><td>BPOST Parcelcode</td><td>EMS Parcelcode</td></tr>";
                         var bpostarrivedlen = data.bpostParcels.arrivedChina.length;
                         var bpostarrivedtxt = "";
 
@@ -160,52 +160,52 @@
 
         <div class="container">
 
-            <h3>批量包裹查询，包裹号之间用空格分开，后台REST ,前端JQuery，JSON数据</h3>
+            <h3>query DHL and BPOST parcels in batch (JQuery + Restful Service )</h3>
             <div class="form-group">
                 <form id="myForm" action="rest/query/post" method="post">
-                    德国DHL:<br/>
+                    DHL:<br/>
                      <TEXTAREA id="dhlcodes" NAME="dhlcodes" ROWS=10 class="form-control"></TEXTAREA>
                      <input x-webkit-speech id="dhlmic" />
                 <BR>
-                比利时邮政:<br/>
+                BPOST:<br/>
                 <TEXTAREA id="bpostcodes" NAME="bpostcodes" ROWS=10 class="form-control" ></TEXTAREA>
                 <input x-webkit-speech id="bpostmic"  />
                 <BR>
-                <button type="submit" class="btn btn-default">查询</button>
+                <button type="submit" class="btn btn-default">Query</button>
                 </form>
         </div>
-        <h3> DHL 已到达中国 </h3>
+        <h3> DHL arrived China </h3>
         <table id="dhlArrived" class="hidden">
             <tr>
-                <th>DHL 包裹单号</th>
-                <th>中国邮政转运号</th>
+                <th>DHL Parcelcode</th>
+                <th>Chinapost Parcelcode</th>
             </tr>
         </table>
     
-        <h3> DHL 还未到到达中国 </h3>
+        <h3> DHL not arrived China </h3>
         <table id="dhlnotArrived" class="hidden">
             <tr>
-                <th>DHL 包裹单号</th>
-                <th>中国邮政转运号</th>
+               <th>DHL Parcelcode</th>
+                <th>Chinapost Parcelcode</th>
             </tr>
         </table>
     
         <br>
         
-        <h3> BPOST 已到达中国 </h3>
+        <h3> BPOST arrived China </h3>
         <table id="bpostArrived" class="hidden">
             <tr>
-                <th>BPOST 包裹单号</th>
-                <th>中国邮政转运号</th>
+                <th>BPOST Parcelcode</th>
+                <th>EMS Parcelcode</th>
             </tr>
         </table>
     
         
-        <h3> BPOST 还未到到达中国 </h3>
+        <h3> BPOST not arrived China </h3>
         <table id="bpostnotArrived" class="hidden">
             <tr>
-                <th>DHL 包裹单号</th>
-                <th>中国邮政转运号</th>
+                <th>DHL Parcelcode</th>
+                <th>EMS Parcelcode</th>
             </tr>
         </table>
         </div>
