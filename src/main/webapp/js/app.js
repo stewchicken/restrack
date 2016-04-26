@@ -28,8 +28,9 @@ var app =angular
                         console.log(data);
                         console.log(status);
                         if (status=200) {
-                            // Showing errors.
-                            $scope.parcels=data;
+                            // Successful
+                            parcels=data;
+                            $scope.parcels=parcels;
                         } 
                     });
             };
