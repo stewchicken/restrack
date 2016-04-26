@@ -14,8 +14,8 @@ var app =angular
                   arrivedChina:[]
               }
             };  
-            // $scope.queryFormData = { }; this does not work when submit form are not entered 
-            $scope.queryFormData = { dhlcodes:"",bpostcodes:"" };
+            //$scope.queryFormData = { }; here to force a json object for form param 
+            // but we dont need it since our rest service need string instead of json as input
             // calling our submit function.
             $scope.submitForm = function() {
                                      
