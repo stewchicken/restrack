@@ -50,7 +50,7 @@ and open the template in the editor.
         <div>
 		<ul>
 			<li ng-repeat="parcel in parcels.dhlParcels.arrivedChina">
-				DHLCODE  {{ parcel.bpostcode}}  CNPOST {{ parcel.chinapostcode}} 
+				DHLCODE  {{ parcel.dhlcode}}  CNPOST {{ parcel.chinapostcode}} 
 			</li>
 		</ul>
 	</div>
@@ -68,7 +68,7 @@ and open the template in the editor.
         <div>
 		<ul>
 			<li ng-repeat="parcel in parcels.bpostParcels.arrivedChina">
-				BPOST  {{ parcel.dhlcode}}  EMS  {{ parcel.emscode}} 
+				BPOST  {{ parcel.bpostcode}}  EMS  {{ parcel.emscode}} 
 			</li>
 		</ul>
 	</div>
